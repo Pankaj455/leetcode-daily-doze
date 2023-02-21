@@ -1,3 +1,7 @@
+/*
+ * string to integer
+ */
+
 public class leetcode8 {
     public static void main(String[] args) {
         System.out.println("ans: " + myAtoi("+-12"));
@@ -16,7 +20,10 @@ public class leetcode8 {
         if (ch == ' ') {
             while (ch == ' ') {
                 i++;
-                ch = s.charAt(i);
+                if (i < n)
+                    ch = s.charAt(i);
+                else
+                    break;
             }
         }
         while (i < n) {
@@ -33,14 +40,14 @@ public class leetcode8 {
             } else if (ch == '+') {
                 if (result > 0)
                     break;
-                else if (i > 0 && (s.charAt(i - 1) == '-' || s.charAt(i - 1) == '+')) {
+                else if (i > 0 && (s.charAt(i - 1) == '-' || s.charAt(i - 1) == '+' || s.charAt(i - 1) == '0')) {
                     result = 0;
                     break;
                 }
             } else if (ch == '-') {
                 if (negative || result > 0)
                     break;
-                else if (i > 0 && (s.charAt(i - 1) == '-' || s.charAt(i - 1) == '+')) {
+                else if (i > 0 && (s.charAt(i - 1) == '-' || s.charAt(i - 1) == '+' || s.charAt(i - 1) == '0')) {
                     result = 0;
                     break;
                 }
@@ -50,6 +57,7 @@ public class leetcode8 {
             }
             i++;
         }
+
         if (negative && result > 0) {
             result *= (long) -1;
         }
